@@ -1,0 +1,137 @@
+/* Общие стили для страницы 404 */
+body {
+  background-color: #2c003e;
+  color: #fff;
+  font-family: 'Fedra Sans', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  overflow: hidden;
+}
+
+header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 10rem;
+  font-weight: bold;
+  color: var(--highlight-color);
+  animation: bounce 1s ease-in-out infinite;
+  text-shadow: 0 0 15px rgba(138, 43, 226, 0.8), 0 0 30px rgba(138, 43, 226, 0.6), 0 0 45px rgba(138, 43, 226, 0.4);
+}
+
+.subtitle {
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-top: -1rem;
+}
+
+.error-section {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.error-message {
+  font-size: 1.5rem;
+  color: #f5f5f5;
+  margin: 2rem 0;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.back-home {
+  background-color: var(--highlight-color);
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 1rem;
+  animation: fadeInUp 0.8s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.back-home:hover {
+  background-color: #fff;
+  color: var(--background-color);
+}
+
+.error-image {
+  margin-top: 3rem;
+}
+
+.error-img {
+  width: 60%;
+  max-width: 400px;
+  animation: scaleIn 1.2s ease-in-out;
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  padding: 1rem;
+  text-align: center;
+}
+
+footer p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Ограничения для вопросов */
+.question {
+  font-size: 4rem;
+  color: rgba(138, 43, 226, 0.5); /* Темно-фиолетовый с прозрачностью */
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+  transition: transform 0.3s ease, opacity 0.5s ease;
+  will-change: transform, opacity;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .title {
+    font-size: 8rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+
+  .error-message {
+    font-size: 1.2rem;
+  }
+
+  .back-home {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .error-img {
+    width: 80%;
+  }
+}

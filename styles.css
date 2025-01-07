@@ -144,7 +144,7 @@ header {
 
 .photo-text {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* Сдвиг контента влево */
   align-items: center;
   margin-bottom: 2rem;
   padding: 2rem;
@@ -186,6 +186,11 @@ header {
   line-height: 1.6;
   max-width: 600px;
   margin: 0 auto;
+}
+
+/* Убираем подчеркивание у ссылок */
+.project-link {
+  text-decoration: none;
 }
 
 .socials {
@@ -251,8 +256,9 @@ footer p {
 @media (max-width: 768px) {
   .photo-text {
     flex-direction: column;
+    justify-content: center;
   }
-  
+
   .photo-img {
     margin-bottom: 1rem;
     width: 100%;
