@@ -1,8 +1,8 @@
 /* Подключение шрифта Fedra Sans */
 @font-face {
   font-family: 'Fedra Sans';
-  src: url('fonts/fedra-sans.woff2') format('woff2'),
-       url('fonts/fedra-sans.woff') format('woff');
+  src: url('fedra-sans.woff2') format('woff2'),
+       url('fedra-sans.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
