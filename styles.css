@@ -38,13 +38,12 @@ body {
   animation: fadeIn 1.5s ease-in; /* Плавное появление страницы */
 }
 
-/* Анимация для плавного появления */
+/* Анимации */
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
 
-/* Анимация для переливающегося текста с фиолетовыми оттенками */
 @keyframes colorShift {
   0% { color: #c8a2d8; }
   20% { color: #a26ac2; }
@@ -54,20 +53,29 @@ body {
   100% { color: #c8a2d8; }
 }
 
-/* Анимация для заголовка с эффектом "прыжка" */
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
 
-/* Анимация для появления сдвигом */
 @keyframes fadeInUp {
   0% { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes glowText {
+  0% { text-shadow: 0 0 10px rgba(138, 43, 226, 0.5), 0 0 20px rgba(138, 43, 226, 0.7); }
+  100% { text-shadow: 0 0 20px rgba(138, 43, 226, 1), 0 0 40px rgba(138, 43, 226, 1); }
+}
+
+@keyframes slideIn {
+  0% { transform: translateX(-30px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Основные стили */
 header {
-  padding: 3rem;
+  padding: 2rem;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -75,7 +83,7 @@ header {
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #fff;
   position: relative;
@@ -85,32 +93,155 @@ header {
   animation: colorShift 5s infinite, bounce 1s ease-in-out infinite;
 }
 
+.navbar {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.navbar ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--highlight-color);
+  font-size: 1.2rem;
+}
+
+.about, .projects, .timeline, .socials {
+  padding: 2rem;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.timeline-item {
+  margin-bottom: 2rem;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline-date {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--highlight-color);
+}
+
+.timeline-text {
+  font-size: 1.2rem;
+}
+
+.timeline-item:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--highlight-color);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Кнопка смены темы (темная/светлая) */
+button.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--highlight-color);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 12px; /* Скругление углов кнопки */
+  cursor: pointer;
+  border: none;
+  z-index: 10; /* Обеспечивает, что кнопка будет на переднем плане */
+  transition: background-color 0.3s ease;
+}
+
+button.theme-toggle:hover {
+  background-color: #7f4a9d;
+}
+
+/* Социальные кнопки */
+.social-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--highlight-color);
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 12px; /* Скругление углов */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
+  z-index: 5; /* Убедимся, что кнопки не перекрывают другие элементы */
+}
+
+.social-button:hover {
+  background-color: #fff;
+  color: var(--background-color);
+  transform: scale(1.05);
+}
+
+/* Цвета для разных социальных кнопок */
+.telegram { background-color: #0088cc; }
+.vk { background-color: #4a76a8; }
+.youtube { background-color: #ff0000; }
+.github { background-color: #333; }
+
+/* Стили для темной темы */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+}
+
+body.dark-mode .navbar a {
+  color: var(--highlight-color);
+}
+
+body.dark-mode .social-button {
+  background-color: var(--highlight-color);
+}
+
+body.dark-mode .social-button:hover {
+  background-color: #fff;
+  color: var(--background-color);
+}
+
+/* Анимации */
 .about {
   background-color: var(--background-color);
-  padding: 3rem;
+  padding: 2rem;
   max-width: 1000px;
   margin: 0 auto;
   border-radius: 0;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.5s ease, background-color 0.5s ease;
-  animation: fadeInUp 1s ease-out; /* Появление изнизу */
+  animation: fadeInUp 1s ease-out;
 }
 
 .about h2 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   color: var(--highlight-color);
   text-align: center;
   margin-bottom: 1rem;
   position: relative;
   font-family: 'Fedra Sans', sans-serif;
-  text-shadow: 0 0 15px rgba(138, 43, 226, 0.8), 0 0 30px rgba(138, 43, 226, 0.6), 0 0 45px rgba(138, 43, 226, 0.4);
+  text-shadow: 0 0 15px rgba(138, 43, 226, 0.8), 0 0 30px rgba(138, 43, 226, 0.6);
   letter-spacing: 2px;
-  animation: glowText 1.5s ease-in-out infinite alternate; /* Эффект свечения */
-}
-
-@keyframes glowText {
-  0% { text-shadow: 0 0 10px rgba(138, 43, 226, 0.5), 0 0 20px rgba(138, 43, 226, 0.7); }
-  100% { text-shadow: 0 0 20px rgba(138, 43, 226, 1), 0 0 40px rgba(138, 43, 226, 1); }
+  animation: glowText 1.5s ease-in-out infinite alternate;
 }
 
 .about p {
@@ -121,7 +252,7 @@ header {
   transition: opacity 0.3s ease;
   word-wrap: break-word;
   opacity: 0;
-  animation: fadeInText 2s 0.5s forwards; /* Плавное появление текста */
+  animation: fadeInText 2s 0.5s forwards;
 }
 
 @keyframes fadeInText {
@@ -131,45 +262,40 @@ header {
 
 .projects {
   margin-top: 3rem;
-  padding: 3rem 0;
+  padding: 2rem 0;
   text-align: center;
 }
 
 .projects h2 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   color: var(--highlight-color);
   margin-bottom: 2rem;
-  animation: fadeInUp 2s ease-out; /* Появление заголовка "Проекты" */
+  animation: fadeInUp 2s ease-out;
 }
 
 .photo-text {
   display: flex;
-  justify-content: flex-start; /* Сдвиг контента влево */
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 2rem;
-  padding: 2rem;
+  padding: 1rem;
   background: var(--background-color);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   transition: transform 0.3s ease;
-  animation: slideIn 0.8s ease-out; /* Анимация появления сдвигом */
-}
-
-@keyframes slideIn {
-  0% { transform: translateX(-30px); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
+  animation: slideIn 0.8s ease-out;
 }
 
 .photo-img {
-  width: 300px;
+  width: 250px;
   height: auto;
   border-radius: 10px;
-  margin-right: 2rem;
+  margin-right: 1rem;
   transition: transform 0.3s ease;
 }
 
 .photo-text:hover .photo-img {
-  transform: scale(1.05); /* Легкое увеличение изображения при наведении */
+  transform: scale(1.05);
 }
 
 .text h3 {
@@ -188,19 +314,18 @@ header {
   margin: 0 auto;
 }
 
-/* Убираем подчеркивание у ссылок */
 .project-link {
   text-decoration: none;
 }
 
 .socials {
-  padding: 3rem;
+  padding: 2rem;
   background-color: var(--background-color);
   text-align: center;
 }
 
 .socials h2 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   color: var(--highlight-color);
   margin-bottom: 2rem;
 }
@@ -208,7 +333,7 @@ header {
 .social-links {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .social-button {
@@ -217,19 +342,19 @@ header {
   background-color: var(--highlight-color);
   color: #fff;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   border-radius: 5px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   width: 100%;
-  max-width: 250px;
+  max-width: 200px;
   text-align: center;
 }
 
 .social-button:hover {
   background-color: #fff;
   color: var(--background-color);
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 /* Разные цвета для социальных кнопок */
@@ -253,6 +378,20 @@ footer p {
 }
 
 /* Адаптивные стили */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .about h2 {
+    font-size: 2.8rem;
+  }
+
+  .photo-img {
+    width: 200px;
+  }
+}
+
 @media (max-width: 768px) {
   .photo-text {
     flex-direction: column;
@@ -271,5 +410,27 @@ footer p {
   .social-links {
     flex-direction: column;
     gap: 1rem;
+  }
+
+  footer {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 1rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .about h2 {
+    font-size: 2.2rem;
+  }
+
+  .photo-img {
+    width: 180px;
   }
 }

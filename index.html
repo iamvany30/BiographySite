@@ -13,13 +13,22 @@
     <h1 class="title">Биография iamvany20</h1>
   </header>
 
+  <nav class="navbar">
+    <ul>
+      <li><a href="#about">Обо мне</a></li>
+      <li><a href="#projects">Проекты</a></li>
+      <li><a href="#socials">Социальные сети</a></li>
+      <li><a href="#timeline">Моя история</a></li>
+    </ul>
+  </nav>
+
   <main class="content">
-    <section class="about">
+    <section id="about" class="about">
       <h2>Обо мне</h2>
-      <p>Привет! Меня зовут Иван, и я Python-разработчик. Моя жизнь – это увлекательное путешествие, в котором я совмещаю креативный подход к работе, желание помогать людям и создание уникальных проектов.</p>
+      <p>Меня зовут Иван, и я занимаюсь разработкой на языке Python. Моя жизнь — это захватывающее приключение, в котором я сочетаю творческий подход к работе, стремление помогать людям и создание неповторимых проектов.</p>
     </section>
 
-    <section class="projects">
+    <section id="projects" class="projects">
       <h2>Проекты</h2>
       <section class="photo-text">
         <a href="https://t.me/LootVPN_bot" class="project-link">
@@ -28,13 +37,33 @@
           </div>
           <div class="text">
             <h3>LootVPN</h3>
-            <p>Мой путь в программировании начался с изучения Python, и с тех пор я не могу остановиться. Я стремлюсь создавать удобные и эффективные решения для людей, решать их задачи с помощью технологий и разрабатывать уникальные проекты. В будущем планирую углубить свои знания и развивать навыки в области машинного обучения и искусственного интеллекта.</p>
+            <p>Моё погружение в мир программирования началось с реализации успешного проекта LootVPN, который предоставляет доступ к заблокированным ресурсам и обеспечивает анонимное использование интернета. </p>
           </div>
         </a>
       </section>
     </section>
 
-    <section class="socials">
+    <section id="timeline" class="timeline">
+      <h2>Моя история</h2>
+      <div class="timeline-item">
+        <span class="timeline-date">2019</span>
+        <p class="timeline-text">Начал изучать Python</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">2020</span>
+        <p class="timeline-text">Создал первый проект — MicroWorld</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">2021</span>
+        <p class="timeline-text">Усовершенствовал навыки в сфере Python-разработки, успешно освоив программу курса для начинающих специалистов</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">2024</span>
+        <p class="timeline-text">Создал первый успешный проэкт - LootVPN</p>
+      </div>
+    </section>
+
+    <section id="socials" class="socials">
       <h2>Follow Me</h2>
       <div class="social-links">
         <a href="https://t.me/iamvany20" class="social-button telegram">
@@ -54,12 +83,14 @@
   </main>
 
   <footer class="footer">
-    <p>&copy; 2025 Иван Акимов. Все права защищены.</p>
+    <p>&copy; 2025 iamvany20. Все права защищены.</p>
   </footer>
 
   <button class="scroll-to-top">
     <i class="fas fa-arrow-up"></i>
   </button>
+
+  <button class="theme-toggle" onclick="toggleTheme()">Переключить тему</button>
 
   <script src="script.js"></script>
 </body>

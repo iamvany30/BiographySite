@@ -1,25 +1,29 @@
-// Получаем кнопку
-const scrollToTopBtn = document.querySelector('.scroll-to-top');
+// Переключение темы
+const themeToggleButton = document.querySelector('.theme-toggle');
 
-// Функция для отображения или скрытия кнопки
-function toggleScrollToTopButton() {
-  if (window.scrollY > 200) {
-    scrollToTopBtn.style.display = 'block'; // Показываем кнопку
+themeToggleButton.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  
+  // Можно изменить цвет кнопки, чтобы отобразить текущее состояние
+  if (document.body.classList.contains('dark-mode')) {
+    themeToggleButton.textContent = 'Светлая тема';
   } else {
-    scrollToTopBtn.style.display = 'none'; // Скрываем кнопку
+    themeToggleButton.textContent = 'Тёмная тема';
   }
-}
+});
 
-// Функция для прокрутки наверх
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-}
+// Прокрутка страницы вверх
+const scrollToTopButton = document.querySelector('.scroll-to-top');
 
-// Слушаем событие прокрутки страницы
-window.addEventListener('scroll', toggleScrollToTopButton);
+scrollToTopButton.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
-// Обработчик клика по кнопке
-scrollToTopBtn.addEventListener('click', scrollToTop);
+// Показать/скрыть кнопку прокрутки
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    scrollToTopButton.style.display = 'block';
+  } else {
+    scrollToTopButton.style.display = 'none';
+  }
+});

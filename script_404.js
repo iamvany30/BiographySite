@@ -6,6 +6,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const texts = ["Что?", "Где?", "Куда?", "404", "What?", "Where?", "WTF"];  // Массив с текстами
   const questions = [];
 
+  // Функция для расчета размера объектов относительно экрана
+  function calculateSize() {
+    return Math.min(screenWidth, screenHeight) * 0.15; // 15% от минимальной стороны экрана
+  }
+
+  // Функция для расчета скорости относительно размера экрана
+  function calculateSpeed() {
+    return Math.max(screenWidth, screenHeight) / 1000; // Скорость зависит от размера экрана
+  }
+
+  // Функция для расчета порога коллизии
+  function calculateCollisionThreshold(size) {
+    return size * 1.2 * (Math.min(screenWidth, screenHeight) / 1000); // Порог коллизий зависит от размера экрана
+  }
+
   // Генерация вопросов
   for (let i = 0; i < questionCount; i++) {
     const question = document.createElement('div');
@@ -18,9 +33,16 @@ document.addEventListener("DOMContentLoaded", function () {
     let xPos = Math.random() * (screenWidth - 200);  // Горизонтальная позиция
     let yPos = Math.random() * (screenHeight - 200);  // Вертикальная позиция, не выходящая за пределы экрана
 
+    // Расчет размера вопроса в зависимости от размера экрана
+    const size = calculateSize();
+
     // Устанавливаем вопрос в контейнер
     question.style.left = `${xPos}px`;  // Устанавливаем горизонтальное положение
     question.style.top = `${yPos}px`;  // Устанавливаем вертикальное положение
+    question.style.fontSize = `${size / 4}px`; // Размер шрифта пропорционален размеру объекта
+    question.style.width = `${size}px`; // Ширина объекта
+    question.style.height = `${size}px`; // Высота объекта
+    question.style.lineHeight = `${size}px`; // Центрирование текста внутри объекта
 
     // Начальная прозрачность для анимации
     question.style.opacity = '0';
@@ -40,7 +62,9 @@ document.addEventListener("DOMContentLoaded", function () {
       y: yPos,
       directionX: Math.random() > 0.5 ? 1 : -1,
       directionY: Math.random() > 0.5 ? 1 : -1,
-      speed: Math.random() * 2 + 1.5,  // Оставлена высокая скорость для плавности
+      speed: calculateSpeed(),  // Скорость зависит от размера экрана
+      size: size,
+      collisionThreshold: calculateCollisionThreshold(size), // Порог коллизии зависит от размера экрана
       isRemoved: false,  // Добавляем свойство для отслеживания, удален ли вопрос
     });
   }
@@ -56,11 +80,11 @@ document.addEventListener("DOMContentLoaded", function () {
         q.y += q.directionY * q.speed;
 
         // Проверка на столкновение с краями экрана
-        if (q.x <= 0 || q.x >= screenWidth - 100) {
+        if (q.x <= 0 || q.x >= screenWidth - q.size) {
           q.directionX *= -1;  // Меняем направление по горизонтали
         }
 
-        if (q.y <= 0 || q.y >= screenHeight - 100) {
+        if (q.y <= 0 || q.y >= screenHeight - q.size) {
           q.directionY *= -1;  // Меняем направление по вертикали
         }
 
@@ -70,10 +94,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const distance = Math.sqrt(Math.pow(q.x - otherQ.x, 2) + Math.pow(q.y - otherQ.y, 2));
 
             // Если вопросы слишком близки друг к другу
-            if (distance < 100) {  // Порог близости для столкновения
+            if (distance < q.collisionThreshold) {  // Используем динамический порог для коллизий
               // Расчёт корректировки позиции для предотвращения пересечения
               const angle = Math.atan2(q.y - otherQ.y, q.x - otherQ.x);
-              const overlap = 100 - distance;  // Порог перекрытия
+              const overlap = q.collisionThreshold - distance;  // Порог перекрытия
 
               // Отодвигаем оба вопроса на основе угла столкновения
               q.x += Math.cos(angle) * overlap * 0.5;
@@ -85,13 +109,23 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
 
-        // Проверка, если вопрос выходит за пределы экрана
-        if (q.x < 0 || q.x > screenWidth || q.y < 0 || q.y > screenHeight - 100) {
-          // Плавное исчезновение и перемещение в новую позицию
+        // Ограничение для максимальной скорости
+        q.speed = Math.min(q.speed, 4); // Максимальная скорость, можно регулировать
+
+        // Ограничение для движения по экрану
+        q.x = Math.max(0, Math.min(screenWidth - q.size, q.x));  // Ограничиваем движение по X
+        q.y = Math.max(0, Math.min(screenHeight - q.size, q.y));  // Ограничиваем движение по Y
+
+        // Обновляем позицию вопроса
+        q.el.style.left = `${q.x}px`;
+        q.el.style.top = `${q.y}px`;
+
+        // Плавное исчезновение и перемещение в новую позицию
+        if (q.x < 0 || q.x > screenWidth || q.y < 0 || q.y > screenHeight - q.size) {
           q.el.style.opacity = '0';
           setTimeout(() => {
-            q.x = Math.random() * (screenWidth - 200);
-            q.y = Math.random() * (screenHeight - 200);
+            q.x = Math.random() * (screenWidth - q.size);
+            q.y = Math.random() * (screenHeight - q.size);
 
             // Плавное возвращение и появление
             q.el.style.left = `${q.x}px`;
@@ -99,10 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
             q.el.style.opacity = '1';
           }, 500);  // Задержка, чтобы исчезновение было плавным
         }
-
-        // Обновляем позицию вопроса
-        q.el.style.left = `${q.x}px`;
-        q.el.style.top = `${q.y}px`;
       });
     }, 20);  // Обновление каждую 1/50 секунды для плавности
   }
